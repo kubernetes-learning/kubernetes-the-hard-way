@@ -93,6 +93,7 @@ wget https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/linux
 
 GFW version:
 wget http://ppc7ozklb.bkt.clouddn.com/kubectl
+scp kubectl root@47.105.145.228:/root/kubernetes/
 ```
 
 ```
