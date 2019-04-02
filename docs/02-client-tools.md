@@ -90,6 +90,9 @@ sudo mv kubectl /usr/local/bin/
 
 ```
 wget https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/linux/amd64/kubectl
+
+GFW version:
+wget http://ppc7ozklb.bkt.clouddn.com/kubectl
 ```
 
 ```
