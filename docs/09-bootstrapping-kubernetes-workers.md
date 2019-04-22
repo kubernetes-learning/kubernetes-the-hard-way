@@ -75,6 +75,8 @@ Retrieve the Pod CIDR range for the current compute instance:
 ```
 POD_CIDR=$(curl -s -H "Metadata-Flavor: Google" \
   http://metadata.google.internal/computeMetadata/v1/instance/attributes/pod-cidr)
+
+POD_CIDR=10.200.0.0/16
 ```
 
 Create the `bridge` network configuration file:
