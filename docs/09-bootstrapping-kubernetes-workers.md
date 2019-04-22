@@ -7,7 +7,7 @@ In this lab you will bootstrap three Kubernetes worker nodes. The following comp
 The commands in this lab must be run on each worker instance: `worker-0`, `worker-1`, and `worker-2`. Login to each worker instance using the `gcloud` command. Example:
 
 ```
-gcloud compute ssh worker-0
+ssh root@47.105.160.33
 ```
 
 ### Running commands in parallel with tmux
@@ -20,8 +20,9 @@ Install the OS dependencies:
 
 ```
 {
-  sudo apt-get update
-  sudo apt-get -y install socat conntrack ipset
+  sudo yum install socat
+  sudo yum install conntrack
+  sudo yum install ipset
 }
 ```
 
