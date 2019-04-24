@@ -25,34 +25,30 @@ When generating kubeconfig files for Kubelets the client certificate matching th
 Generate a kubeconfig file for each worker node:
 
 ```
-for instance in worker-0 worker-1 worker-2; do
-  kubectl config set-cluster kubernetes-the-hard-way \
+kubectl config set-cluster kubernetes-the-hard-way \
     --certificate-authority=ca.pem \
     --embed-certs=true \
-    --server=https://${KUBERNETES_PUBLIC_ADDRESS}:6443 \
-    --kubeconfig=${instance}.kubeconfig
+    --server=https://47.105.145.228:6443 \
+    --kubeconfig=worker-0.kubeconfig
 
-  kubectl config set-credentials system:node:${instance} \
-    --client-certificate=${instance}.pem \
-    --client-key=${instance}-key.pem \
+kubectl config set-credentials system:node:worker-0 \
+    --client-certificate=worker-0.pem \
+    --client-key=worker-0-key.pem \
     --embed-certs=true \
-    --kubeconfig=${instance}.kubeconfig
+    --kubeconfig=worker-0.kubeconfig
 
-  kubectl config set-context default \
+kubectl config set-context default \
     --cluster=kubernetes-the-hard-way \
-    --user=system:node:${instance} \
-    --kubeconfig=${instance}.kubeconfig
+    --user=system:node:worker-0 \
+    --kubeconfig=worker-0.kubeconfig
 
-  kubectl config use-context default --kubeconfig=${instance}.kubeconfig
-done
+kubectl config use-context default --kubeconfig=worker-0.kubeconfig
 ```
 
 Results:
 
 ```
 worker-0.kubeconfig
-worker-1.kubeconfig
-worker-2.kubeconfig
 ```
 
 ### The kube-proxy Kubernetes Configuration File
