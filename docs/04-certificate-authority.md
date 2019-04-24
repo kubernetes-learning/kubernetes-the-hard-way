@@ -112,10 +112,9 @@ Kubernetes uses a [special-purpose authorization mode](https://kubernetes.io/doc
 Generate a certificate and private key for each Kubernetes worker node:
 
 ```
-for instance in worker-0 worker-1 worker-2; do
-cat > ${instance}-csr.json <<EOF
+cat > worker-0-csr.json <<EOF
 {
-  "CN": "system:node:${instance}",
+  "CN": "system:node:worker-0",
   "key": {
     "algo": "rsa",
     "size": 2048
@@ -132,20 +131,13 @@ cat > ${instance}-csr.json <<EOF
 }
 EOF
 
-EXTERNAL_IP=$(gcloud compute instances describe ${instance} \
-  --format 'value(networkInterfaces[0].accessConfigs[0].natIP)')
-
-INTERNAL_IP=$(gcloud compute instances describe ${instance} \
-  --format 'value(networkInterfaces[0].networkIP)')
-
 cfssl gencert \
   -ca=ca.pem \
   -ca-key=ca-key.pem \
   -config=ca-config.json \
-  -hostname=${instance},${EXTERNAL_IP},${INTERNAL_IP} \
+  -hostname=worker-0,47.105.160.33,172.31.245.28 \
   -profile=kubernetes \
-  ${instance}-csr.json | cfssljson -bare ${instance}
-done
+  worker-0-csr.json | cfssljson -bare worker-0
 ```
 
 Results:
@@ -153,10 +145,6 @@ Results:
 ```
 worker-0-key.pem
 worker-0.pem
-worker-1-key.pem
-worker-1.pem
-worker-2-key.pem
-worker-2.pem
 ```
 
 ### The Controller Manager Client Certificate
