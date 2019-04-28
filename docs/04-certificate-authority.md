@@ -147,6 +147,41 @@ worker-0-key.pem
 worker-0.pem
 ```
 
+Generate a certificate and private key for worker-node NO.1:
+```
+cat > worker-1-csr.json <<EOF
+{
+  "CN": "system:node:worker-1",
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "US",
+      "L": "Portland",
+      "O": "system:nodes",
+      "OU": "Kubernetes The Hard Way",
+      "ST": "Oregon"
+    }
+  ]
+}
+EOF
+
+cfssl gencert \
+  -ca=ca.pem \
+  -ca-key=ca-key.pem \
+  -config=ca-config.json \
+  -hostname=worker-1,47.105.50.214,172.31.245.27 \
+  -profile=kubernetes \
+  worker-1-csr.json | cfssljson -bare worker-1
+```
+Results:
+```
+worker-1-key.pem
+worker-1.pem
+```
+
 ### The Controller Manager Client Certificate
 
 Generate the `kube-controller-manager` client certificate and private key:
