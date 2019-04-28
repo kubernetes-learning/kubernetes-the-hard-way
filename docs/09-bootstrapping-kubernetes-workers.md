@@ -183,10 +183,20 @@ EOF
 
 ### Configure the Kubelet
 
+Worker-0:
 ```
 {
-  sudo mv ${HOSTNAME}-key.pem ${HOSTNAME}.pem /var/lib/kubelet/
-  sudo mv ${HOSTNAME}.kubeconfig /var/lib/kubelet/kubeconfig
+  sudo mv worker-0-key.pem worker-0.pem /var/lib/kubelet/
+  sudo mv worker-0.kubeconfig /var/lib/kubelet/kubeconfig
+  sudo mv ca.pem /var/lib/kubernetes/
+}
+```
+
+Worker-1:
+```
+{
+  sudo mv worker-1-key.pem worker-1.pem /var/lib/kubelet/
+  sudo mv worker-1.kubeconfig /var/lib/kubelet/kubeconfig
   sudo mv ca.pem /var/lib/kubernetes/
 }
 ```
