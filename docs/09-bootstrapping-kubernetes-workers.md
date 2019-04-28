@@ -68,6 +68,19 @@ Install the worker binaries:
 }
 ```
 
+Move containerd binary files to `/usr/local/bin`
+```
+{
+  mv containerd-1.2.0/bin/containerd /usr/local/bin
+  mv containerd-1.2.0/bin/containerd-release /usr/local/bin
+  mv containerd-1.2.0/bin/containerd-shim /usr/local/bin
+  mv containerd-1.2.0/bin/containerd-shim-runc-v1 /usr/local/bin
+  mv containerd-1.2.0/bin/containerd-stress /usr/local/bin
+  mv containerd-1.2.0/bin/ctr /usr/local/bin
+}
+```
+
+
 ### Configure CNI Networking
 
 Retrieve the Pod CIDR range for the current compute instance:
