@@ -229,6 +229,8 @@ tlsPrivateKeyFile: "/var/lib/kubelet/${HOSTNAME}-key.pem"
 EOF
 ```
 
+> The `podCIDR` should be `10.200.1.0/24` for `worker-0` and `10.200.2.0/24` for `worker-1`.
+
 > The `resolvConf` configuration is used to avoid loops when using CoreDNS for service discovery on systems running `systemd-resolved`. 
 
 Create the `kubelet.service` systemd unit file:
